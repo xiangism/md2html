@@ -1,37 +1,80 @@
 package md2html
 
+import "fmt"
+
 type AnchorNode struct {
 }
 
-type Node interface {
-	ToString() string
-	CreateAnchor(int) *AnchorNode
+type Parse interface {
+	toString() string
+
+	parse(string) bool
+
+	//CreateAnchor(int) *AnchorNode
 }
 
-type Nodes struct {
-	chNodes []Node
+type Node struct {
+	Name string
+
+	Text    string
+	chNodes []Parse
 }
 
+func NewNode(name string) *Node {
+	n := &Node{Name: name}
+	n.chNodes = make([]Parse, 0)
+	return n
+}
+
+func NewNodeWithText(name, text string) *Node {
+	n := &Node{Name: name, Text: text}
+	n.chNodes = make([]Parse, 0)
+	return n
+}
+
+func (n *Node) toString() string {
+	v := ""
+
+	if len(n.chNodes) > 0 {
+		for _, item := range n.chNodes {
+			v += item.toString()
+		}
+
+	} else {
+		v = n.Text
+	}
+
+	return fmt.Sprintf("<%v>%v</%v>", n.Name, v, n.Name)
+}
+
+func (n *Node) parse(line string) bool {
+	return false
+}
+
+// <h1> </h1>
 type HeadNode struct {
-	Nodes
+	Node
 }
 
+// <ul>
 type UlNode struct {
-	Nodes
+	Node
 }
 
+// <ol>
 type OlNode struct {
-	Nodes
+	Node
 }
 
+// <li>
 type LiNode struct {
-	Nodes
+	Node
 }
 
 type CodeNode struct {
-	Nodes
+	Node
 }
 
 type TextNode struct {
-	Nodes
+	Node
 }

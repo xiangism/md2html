@@ -1,6 +1,11 @@
 package md2html
 
-func MarkdownToHtml(lines[] string) string {
+func MarkdownToHtml(lines []string) string {
+	c := NewContent()
 
-	return ""
+	for _, line := range lines {
+		//fmt.Printf("line:(%v)\n", line)
+		c.Parse(line)
+	}
+	return c.Html()
 }
