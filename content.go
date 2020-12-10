@@ -1,6 +1,9 @@
 package md2html
 
-import "strings"
+import (
+	"fmt"
+	"strings"
+)
 
 type Content struct {
 	top     *Node
@@ -36,17 +39,51 @@ func (c *Content) findNode(line string) {
 		t := NewTableNode(line)
 
 		c.nowNode = t
-		c.top.chNodes = append(c.top.chNodes, t)
+		c.top.append(t)
+		return
+	}
 
-	} else if strings.HasPrefix(line, "* ") {
+	if strings.HasPrefix(line, "* ") {
+		// ul
 		t := NewListNode("ul", line)
 
 		c.nowNode = t
-		c.top.chNodes = append(c.top.chNodes, t)
+		c.top.append(t)
 
-	} else {
+		return
+	}
+
+	if isOlStart(line) {
+		// ol
+		t := NewListNode("ol", line)
+
+		c.nowNode = t
+		c.top.append(t)
+
+		return
+	}
+	{ // head
+		level, title := parseHead(line)
+		if level > 0 {
+			t := NewNodeWithText(fmt.Sprintf("h%v", level), title)
+			c.top.append(t)
+			return
+		}
+	}
+	{ // code
+		if line == codeKey {
+			t := NewCodeArea()
+			c.top.append(t)
+
+			c.nowNode = t
+			return
+		}
+
+	}
+
+	{ // text
 		t := NewNodeWithText("p", line)
-		c.top.chNodes = append(c.top.chNodes, t)
+		c.top.append(t)
 
 		c.nowNode = nil
 	}
@@ -54,7 +91,7 @@ func (c *Content) findNode(line string) {
 
 func (c *Content) Html() string {
 	return "<html>" +
-		"<head>\n<style type=\"text/css\">" + c.Css + "</style>\n</head>" +
+		"<head>\n<style type=\"code/css\">" + c.Css + "</style>\n</head>" +
 		c.top.toString() +
 		"</html>"
 }

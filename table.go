@@ -17,7 +17,7 @@ func NewTableNode(line string) *TableNode {
 
 	for _, item := range rs {
 		n := NewNodeWithText("th", item)
-		t.head.chNodes = append(t.head.chNodes, n)
+		t.head.append(n)
 	}
 
 	t.body.Name = "tbody"
@@ -45,10 +45,10 @@ func (n *TableNode) parse(line string) bool {
 	rs := splitTableLine(line)
 	for _, item := range rs {
 		td := NewNodeWithText("td", item)
-		tr.chNodes = append(tr.chNodes, td)
+		tr.append(td)
 	}
 
-	n.body.chNodes = append(n.body.chNodes, tr)
+	n.body.append(tr)
 
 	return true
 }

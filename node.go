@@ -44,37 +44,13 @@ func (n *Node) toString() string {
 		v = n.Text
 	}
 
-	return fmt.Sprintf("<%v>%v</%v>", n.Name, v, n.Name)
+	return fmt.Sprintf("<%v>%v</%v>\n", n.Name, v, n.Name)
 }
 
 func (n *Node) parse(line string) bool {
 	return false
 }
 
-// <h1> </h1>
-type HeadNode struct {
-	Node
-}
-
-// <ul>
-type UlNode struct {
-	Node
-}
-
-// <ol>
-type OlNode struct {
-	Node
-}
-
-// <li>
-type LiNode struct {
-	Node
-}
-
-type CodeNode struct {
-	Node
-}
-
-type TextNode struct {
-	Node
+func (n *Node) append(c Parse) {
+	n.chNodes = append(n.chNodes, c)
 }
