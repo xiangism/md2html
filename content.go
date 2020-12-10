@@ -36,8 +36,19 @@ func (c *Content) findNode(line string) {
 		t := NewTableNode(line)
 
 		c.nowNode = t
-
 		c.top.chNodes = append(c.top.chNodes, t)
+
+	} else if strings.HasPrefix(line, "* ") {
+		t := NewListNode("ul", line)
+
+		c.nowNode = t
+		c.top.chNodes = append(c.top.chNodes, t)
+
+	} else {
+		t := NewNodeWithText("p", line)
+		c.top.chNodes = append(c.top.chNodes, t)
+
+		c.nowNode = nil
 	}
 }
 

@@ -11,8 +11,8 @@ func TestMk2ToHtml(t *testing.T) {
 	//s := "| | head1 | head2 | head3 |\n|--|--|\n|row1|1.1|1.2|1.3|\n|row2|2.1|2.2|2.3|\n"
 	//ls := strings.Split(s, "\n")
 	//ls := util.ReadFileLines("t.md")
-	ls := util.ReadFileLines("15m.txt")
-	html := MarkdownToHtml(ls)
+	ls := util.ReadFileLines("src.md")
+	html := Convert(ls)
 	util.WriteFile("out.html", html)
 
 }

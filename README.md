@@ -15,8 +15,8 @@ markdown to html lib
 ```
 # head
 ## head
-* lo
-1. lu
+* ul
+1. ol
 *em*
 **stronge**
 ~~del~~

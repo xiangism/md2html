@@ -1,6 +1,6 @@
 package md2html
 
-func MarkdownToHtml(lines []string) string {
+func Convert(lines []string) string {
 	c := NewContent()
 
 	for _, line := range lines {
