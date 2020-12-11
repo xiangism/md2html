@@ -23,7 +23,7 @@ code area <pre><code>
 ## 未来支持
 ```
 *em*
-**stronge**
+**strong**
 ~~del~~
 `code`
 
