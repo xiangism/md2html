@@ -43,3 +43,21 @@ code area <pre><code>
 
 123`code`abc
 
+
+# level
+TODO: 解析出head层级 锚点
+```
+<a id="md_0"></a>
+<h1></h1>
+在h1-h6前面添加 <a></a>
+然后用 # 即可直达
+file:///D:/work/Go_app/GoPath/src/github.com/xiangism/md2html/out.html#md_0
+
+
+h0
+    h0_0
+h1
+    h1_0
+h2
+h3
+```

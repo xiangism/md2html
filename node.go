@@ -2,17 +2,13 @@ package md2html
 
 import "fmt"
 
-type AnchorNode struct {
-}
-
 type Parse interface {
 	toString() string
 
 	parse(string) bool
-
-	//CreateAnchor(int) *AnchorNode
 }
 
+// <Name> Text </Name>
 type Node struct {
 	Name string
 
