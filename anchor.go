@@ -41,6 +41,7 @@ type HeadLevel struct {
 
 func NewHeadLevel(id, name string, l int) *HeadLevel {
 	t := &HeadLevel{Id: id, Name: name, level: l}
+	t.Children = make([]*HeadLevel, 0)
 	return t
 }
 
