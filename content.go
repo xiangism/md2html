@@ -3,6 +3,8 @@ package md2html
 import (
 	"fmt"
 	"strings"
+
+	"git.lakatv.com/xbc/go-lib/util"
 )
 
 type Content struct {
@@ -10,6 +12,10 @@ type Content struct {
 	nowNode Parse
 
 	Css string
+
+	anchorId int
+
+	alllevel []*HeadLevel
 }
 
 func NewContent() *Content {
@@ -18,10 +24,43 @@ func NewContent() *Content {
 	c.Css = "body { font-family:  \"Consolas\" ; } \n table\n{border-collapse:collapse;\n table-layout:fixed;\n}\n table, td, th {border:1px solid black;padding: 5px;padding-left: 10px;    padding-right: 10px;}\n" +
 		"pre { padding: 4pt; max-width: 100%%white-space; line-height: 1.5; border: 1pt solid #ddd; background-color: #f7f7f7;  }\n" +
 		"code { font-family: DejaVu Sans Mono, \\\\5FAE\\\\8F6F\\\\96C5\\\\9ED1; line-height: 1.5; background-color: #f7f7f7; }\n"
+
+	top := NewHeadLevel("", "top", 0)
+	c.alllevel = []*HeadLevel{top}
+
 	return c
 }
 
-func (c *Content) Parse(line string) {
+func (c *Content) ParseLines(lines []string) {
+	for _, line := range lines {
+		c.parse(line)
+	}
+}
+
+func (c *Content) Html() string {
+	return "<html>" +
+		"<head> <meta charset=\"UTF-8\"> \n<style type=\"text/css\">" + c.Css + "</style>\n</head>" +
+		c.body.toString() +
+		"</html>"
+}
+
+/*
+返回 head 结构的层次，json 结构
+*/
+func (c *Content) HeadLevel() string {
+	t := c.parseHeadLevel()
+
+	if t == nil {
+		return "[]"
+	}
+	if len(t.Children) == 0 {
+		return "[]"
+	}
+
+	return util.JsonMarshal(t.Children)
+}
+
+func (c *Content) parse(line string) {
 
 	if c.nowNode != nil {
 		if !c.nowNode.parse(line) {
@@ -66,7 +105,15 @@ func (c *Content) findNode(line string) {
 	}
 	{ // head
 		level, title := parseHead(line)
+
 		if level > 0 {
+			id := c.getAnchorId()
+			a := NewAnchor(id)
+			c.body.append(a)
+
+			tree := NewHeadLevel(id, title, level)
+			c.alllevel = append(c.alllevel, tree)
+
 			t := NewNodeWithText(fmt.Sprintf("h%v", level), title)
 			c.body.append(t)
 			return
@@ -92,9 +139,8 @@ func (c *Content) findNode(line string) {
 	}
 }
 
-func (c *Content) Html() string {
-	return "<html>" +
-		"<head>\n<style type=\"text/css\">" + c.Css + "</style>\n</head>" +
-		c.body.toString() +
-		"</html>"
+func (c *Content) getAnchorId() string {
+	s := fmt.Sprintf("md_%v", c.anchorId)
+	c.anchorId += 1
+	return s
 }
