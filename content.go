@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"git.lakatv.com/xbc/go-lib/util"
+	"gitlab.w2gou.cn/xbc/go-lib/util"
 )
 
 type Content struct {

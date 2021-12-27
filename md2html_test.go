@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"git.lakatv.com/xbc/go-lib/util"
+	"gitlab.w2gou.cn/xbc/go-lib/util"
 )
 
 func TestMk2ToHtml(t *testing.T) {

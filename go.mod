@@ -2,4 +2,4 @@ module github.com/xiangism/md2html
 
 go 1.15
 
-require git.lakatv.com/xbc/go-lib v0.0.0-20201209062712-e09a487abc0f
+require gitlab.w2gou.cn/xbc/go-lib v0.0.0-20211224080143-43ddbfcd81c4
