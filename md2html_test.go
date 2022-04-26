@@ -8,7 +8,7 @@ import (
 )
 
 func TestMk2ToHtml(t *testing.T) {
-	ls := util.ReadFileLines("code.md")
+	ls := util.ReadFileLines("e:/lite.md")
 	//ls := util.ReadFileLines("lite.md")
 
 	c := NewContent()
@@ -18,7 +18,7 @@ func TestMk2ToHtml(t *testing.T) {
 	level := c.HeadLevel()
 
 	util.WriteFile("out.html", html)
-	util.WriteFile("level.json", level)
+	util.WriteFile("out_table.json", level)
 
 }
 

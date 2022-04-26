@@ -120,7 +120,7 @@ func (c *Content) findNode(line string) {
 		}
 	}
 	{ // code
-		if line == codeKey {
+		if strings.HasPrefix(line, codeKey) {
 			t := NewCodeArea()
 
 			c.nowNode = t

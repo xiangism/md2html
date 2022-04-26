@@ -1,5 +1,7 @@
 package md2html
 
+import "strings"
+
 type CodeAreaNode struct {
 	code     string
 	nextStop bool
@@ -20,7 +22,7 @@ func (n *CodeAreaNode) parse(line string) bool {
 		return false
 	}
 
-	if line == codeKey {
+	if strings.HasPrefix(line, codeKey) {
 		n.nextStop = true
 		// 这里应该是下一行才返回 false
 
