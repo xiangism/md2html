@@ -13,7 +13,7 @@ func TestMk2ToHtml(t *testing.T) {
 
 	c := NewContent()
 	c.ParseLines(ls)
-	html := c.Html()
+	html := c.Html("test html")
 
 	level := c.HeadLevel()
 

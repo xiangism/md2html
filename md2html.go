@@ -1,7 +1,7 @@
 package md2html
 
-func Convert(lines []string) string {
+func Convert(lines []string, title string) string {
 	c := NewContent()
 	c.ParseLines(lines)
-	return c.Html()
+	return c.Html(title)
 }

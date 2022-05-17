@@ -37,9 +37,9 @@ func (c *Content) ParseLines(lines []string) {
 	}
 }
 
-func (c *Content) Html() string {
+func (c *Content) Html(title string) string {
 	return "<html>" +
-		"<head> <meta charset=\"UTF-8\"> \n<style type=\"text/css\">" + c.Css + "</style>\n</head>" +
+		"<head><title>" + title + "</title> <meta charset=\"UTF-8\"> \n<style type=\"text/css\">" + c.Css + "</style>\n</head>" +
 		c.body.toString() +
 		"</html>"
 }
