@@ -8,7 +8,7 @@ import (
 )
 
 func TestMk2ToHtml(t *testing.T) {
-	ls := util.ReadFileLines("e:/lite.md")
+	ls := util.ReadFileLines("README.md")
 	//ls := util.ReadFileLines("lite.md")
 
 	c := NewContent()

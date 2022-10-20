@@ -40,8 +40,10 @@ func (c *Content) ParseLines(lines []string) {
 func (c *Content) Html(title string) string {
 	return "<html>" +
 		"<head><title>" + title + "</title> <meta charset=\"UTF-8\"> \n<style type=\"text/css\">" + c.Css + "</style>\n</head>" +
+		"<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"> <meta name=\"apple-touch-fullscreen\" content=\"YES\"> <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">" +
+		"<body>" +
 		c.body.toString() +
-		"</html>"
+		"</body></html>"
 }
 
 /*

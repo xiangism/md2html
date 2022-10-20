@@ -2,7 +2,8 @@
 markdown to html lib
 
 没有依赖第三方工具，完全用golang实现。解析markdown，构建语法树，生成html结构。
-# 
+
+# 1 
 
 # 现支持的markdown标记
 ```
@@ -17,7 +18,7 @@ markdown to html lib
 # head
 ## head
 ###### head
-code area <pre><code>
+code area pre code
 ```
 
 ## 未来支持
