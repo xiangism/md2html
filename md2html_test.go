@@ -3,10 +3,9 @@ package md2html
 import (
 	"fmt"
 	"testing"
-
-	"gitlab.w2gou.cn/xbc/go-lib/util"
 )
 
+/*
 func TestMk2ToHtml(t *testing.T) {
 	ls := util.ReadFileLines("README.md")
 	//ls := util.ReadFileLines("lite.md")
@@ -21,6 +20,7 @@ func TestMk2ToHtml(t *testing.T) {
 	util.WriteFile("out_table.json", level)
 
 }
+*/
 
 func _TestString(t *testing.T) {
 	line := "|head1 | head2 | head3 |head4"

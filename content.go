@@ -1,10 +1,9 @@
 package md2html
 
 import (
+	"encoding/json"
 	"fmt"
 	"strings"
-
-	"gitlab.w2gou.cn/xbc/go-lib/util"
 )
 
 type Content struct {
@@ -59,7 +58,9 @@ func (c *Content) HeadLevel() string {
 		return "[]"
 	}
 
-	return util.JsonMarshal(t.Children)
+	bs, _ := json.Marshal(t.Children)
+
+	return string(bs)
 }
 
 func (c *Content) parse(line string) {
